@@ -10,29 +10,33 @@
 * Exploring the relationships between slowness in traffic with the attributes to understand the critical cases that influence such a issue.
 * Building a basic model to predict the target (slowness in traffic).
 
-## Exploratory Data Analysis and Data Cleaning
-
-### Exploratory Data Analysis and Visualizations
+## Exploratory Data Analysis and Visualizations
 After extracting, converting and adding hours and minutes for each day, it was possible to evaluate:
-* Exploration of the correlation of the data
+* Exploration of the correlation of the data.
 ![](images/correlation_matrix.png)
 
+* Since there is a strong correlation between slowness in traffic and hour, it is relevant to visualize the average of slowness in traffic in each interval time.
+![](images/average_slowness_in_traffic.png)
 
-## Visualizations
-* Monthly plot of the number of games relesed per year.
-![](images/Monthly_number_realeses_year.png)
+* Additionally to observe relationship between hour and slowness in traffic in each day.
+![](images/slowness_in_traffic_each_hour.png)
 
-* Evaluating the top game developers by the amount of games released.
-![](images/top_developers.png)
+* Analysis of the distribution of the data: outliers were found in the 'Immobilized_bus', 'Broken_Truck', 'Accident_victim', 'Slowness_in_traffic_percent' variables.
+![](images/distributions.png)
 
-* Plotting the history of releasing games in Japan for the 1990 year.
-![](images/history_japan_1990.png)
+## Linear Regression model
+After the exploratory data analysis, it was created a Machine Learning model to predict the slowness in traffic (%) and compare with the real values.
+* Dataset split into training and testing set.
+* Mean absolute error (MAE) loss function used for this regression problem.
+* After predicting, the model found the best fit linear.
+![](images/true_vs_prediction.png)
+
+* And also, the error distribution:
+![](images/prediction_error.png)
 
 ## Conclusions
-* The structure of the table from Wikipedia page (HTML document) is missing some table data, so it had to insert manually some items.
-* The first game released in Japan was in November 1990 and the last one was in November 2000.
-* Japan released more games.
-* The peak of releasing was in 1994 for both Japan and North America.
-* The PAL region is not precise because the release data only contain the year in many cases, so when converting the data for month, they automatically become the first month (January). Therefore, the PAL region graph shows peaks of releasing games in every years of January.
-* Incredibly, Nintendo itself is not the most developer of SNES games.
-* The classics Super Mario World and F-zero were the first games released in Super Nintendo history.
+* There is a strong correlation between slowness in traffic and hour as well as lack of energy, point of flooding and semaphore off. The correlation between lack of energy and semaphore off seems to be obvious and natural.
+* The Correlation between slowness in traffic and day of the week is not so relevant comparing with the hour.
+* Friday did not register peaks of slowness in traffic. Considering that people like to spend the weekend out of town, the trafic should have got worse. Apparently it might have result this because the data were colleted in a week which people spent the week in their homes.
+* Even though there were 5 trucks broken (treated as an outlier) at 15:30 on Tuesday, the slowness in traffic was not so high (only 8.4%).
+* The model test result is a mean absolute error (MAE) of 1.97. This means it predicts slowness in traffic correctly within 1.97%. The error distribution shows the model got an error of almost -6(%) in one ocassion. True value is approx. 19(%) and the model predicted approx. 13(%).
